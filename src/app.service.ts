@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class AppService {
   constructor(private readonly configService: ConfigService) {}
-  getHello(): string {
+  getHello() {
     const environmentVariable = this.configService.get<string>('environment');
     console.log(environmentVariable);
     return `Hello World!`;
