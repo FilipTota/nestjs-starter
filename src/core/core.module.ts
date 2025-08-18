@@ -5,6 +5,7 @@ import { TransformResponseInterceptor } from './interceptors/transform-response/
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggerService } from './logger/logger.service';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
+import { DatabaseService } from '../../prisma/database.service';
 
 @Global()
 @Module({
@@ -18,8 +19,9 @@ import { LoggerMiddleware } from './middleware/logger/logger.middleware';
   providers: [
     { provide: APP_INTERCEPTOR, useClass: TransformResponseInterceptor },
     LoggerService,
+    DatabaseService,
   ],
-  exports: [LoggerService],
+  exports: [LoggerService, DatabaseService],
 })
 export class CoreModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
